@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="git_hooks" type="mix">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/deps/git_hooks/lib" />
+      <root url="file://$PROJECT_DIR$/deps/git_hooks/priv" />
+    </SOURCES>
+  </library>
+</component>

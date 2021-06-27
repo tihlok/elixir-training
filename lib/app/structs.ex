@@ -8,4 +8,3 @@ defmodule App.Structs do
   def has_github(%App.Structs{github: github}) when github == :none, do: false
   def has_github(%App.Structs{github: _}), do: true
 end
-

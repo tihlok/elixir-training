@@ -29,7 +29,7 @@ defmodule App.Factorial do
     n * of(n - 1)
   end
 
-  #def of(0) do
+  # def of(0) do
   def of(n) when is_integer(n) and n === 0 do
     1
   end

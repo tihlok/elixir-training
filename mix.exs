@@ -8,7 +8,6 @@ defmodule Leaderboard.MixProject do
       elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-
       name: :leadearboard,
       source_url: "",
       docs: [
@@ -32,6 +31,7 @@ defmodule Leaderboard.MixProject do
       {:ex_doc, "~> 0.24", only: :dev, runtime: false},
       {:httpoison, "~> 1.8.0"},
       {:json, "~> 1.4.1"},
+      {:git_hooks, "~> 0.6.2", only: [:dev], runtime: false}
     ]
   end
 end

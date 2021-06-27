@@ -5,6 +5,6 @@ defmodule LeaderboardTest do
   doctest App.Leaderboard
 
   test "should get ENV" do
-    assert App.Leaderboard.env == :TEST
+    assert App.Leaderboard.env() == :TEST
   end
 end

@@ -12,6 +12,8 @@ defmodule KeywordsTest do
     assert Keyword.get(merged, :name) == "Tiago"
     assert Keyword.get(merged, :age) == 28
     assert Keyword.get(merged, :nick) == :tihlok
-    assert Keyword.get(merged, :github, "https://github.com/tihlok") == "https://github.com/tihlok"
+
+    assert Keyword.get(merged, :github, "https://github.com/tihlok") ==
+             "https://github.com/tihlok"
   end
 end

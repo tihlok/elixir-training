@@ -123,10 +123,12 @@ defmodule App.List do
   end
 
   def reduce([head | tail], value, function) do
-    value = case value do
-      0 -> 1
-      _ -> value
-    end
+    value =
+      case value do
+        0 -> 1
+        _ -> value
+      end
+
     reduce(tail, function.(head, value), function)
   end
 

@@ -10,7 +10,7 @@ defmodule App.Keywords do
       []
   """
   def merge(keywords, options) do
-    Keyword.merge keywords, options
+    Keyword.merge(keywords, options)
   end
 
   @doc """

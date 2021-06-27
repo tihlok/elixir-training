@@ -67,7 +67,7 @@ defmodule TrainingTest do
   end
 
   test "sets" do
-    set1 = 1..10 |> Enum.into MapSet.new
+    set1 = 1..10 |> Enum.into(MapSet.new())
     assert inspect(set1) == "#MapSet<[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]>"
   end
 
@@ -83,20 +83,20 @@ defmodule TrainingTest do
     assert status[{:error, :enoent}] == :fatal
     assert status[{:error, :busy}] == :retry
 
-    colors = %{:red => 0xff0000, :green => 0x00ff00, :blue => 0x0000ff}
-    assert colors == %{blue: 255, green: 65280, red: 16711680}
+    colors = %{:red => 0xFF0000, :green => 0x00FF00, :blue => 0x0000FF}
+    assert colors == %{blue: 255, green: 65280, red: 16_711_680}
 
     # reordered :(
     assert Map.keys(colors) == [:blue, :green, :red]
-    assert Map.values(colors) == [255, 65280, 16711680]
+    assert Map.values(colors) == [255, 65280, 16_711_680]
 
-    only_red = Map.drop colors, [:blue, :green]
+    only_red = Map.drop(colors, [:blue, :green])
     assert Map.keys(only_red) == [:red]
-    assert Map.values(only_red) == [16711680]
+    assert Map.values(only_red) == [16_711_680]
 
-    only_red_and_blue = Map.put only_red, :blue, 0x0000ff
+    only_red_and_blue = Map.put(only_red, :blue, 0x0000FF)
     assert Map.keys(only_red_and_blue) == [:blue, :red]
-    assert Map.values(only_red_and_blue) == [255, 16711680]
+    assert Map.values(only_red_and_blue) == [255, 16_711_680]
   end
 
   test "maps, part 2" do
@@ -114,7 +114,7 @@ defmodule TrainingTest do
     tiago = %{name: "Tiago", nick: "@tihlok", age: 28}
     assert tiago == %{name: "Tiago", nick: "@tihlok", age: 28}
 
-    #get name
+    # get name
     %{name: name} = tiago
     assert name == "Tiago"
 
@@ -124,6 +124,7 @@ defmodule TrainingTest do
       %{name: "Morgana", age: 10},
       %{name: "Logan", age: 5}
     ]
+
     #             [       OBJECT      ] [   ARRAY  ] [CONDITION]  [RETURN]
     major_18 = for each = %{age: age} <- everybody, age >= 18, do: each
     assert major_18 == [%{age: 28, name: "Tiago"}, %{age: 29, name: "Jaque"}]
@@ -131,23 +132,28 @@ defmodule TrainingTest do
 
   test "pattern matching, part 2" do
     data = %{player: "tihlok", score: 1000, verified: true}
-    result = for key <- [:score, :verified] do
-      %{^key => value} = data
-      value
-    end
+
+    result =
+      for key <- [:score, :verified] do
+        %{^key => value} = data
+        value
+      end
+
     assert result === [1000, true]
 
-    result2 = for key <- [:score] do
-      %{^key => value} = data
-      assert value === 1000
-      value
-    end
+    result2 =
+      for key <- [:score] do
+        %{^key => value} = data
+        assert value === 1000
+        value
+      end
+
     assert result2 === [1000]
   end
 
   test "strings" do
     string1 = "common string"
-    string1_capitalized = String.capitalize string1
+    string1_capitalized = String.capitalize(string1)
     assert string1 == "common string"
     assert string1_capitalized == "Common string"
   end
@@ -157,7 +163,7 @@ defmodule TrainingTest do
     assert decimal1 == 12345
 
     decimal2 = 123_555_090
-    assert decimal2 == 123555090
+    assert decimal2 == 123_555_090
 
     floats1 = 2.9
     assert floats1 == 2.9
@@ -168,7 +174,7 @@ defmodule TrainingTest do
     floats3 = 0.0201e-3
     assert floats3 == 2.01e-5
 
-    hexa = 0xcafe
+    hexa = 0xCAFE
     assert hexa == 51966
 
     octa = 0o2311
@@ -214,10 +220,10 @@ defmodule TrainingTest do
     assert action == "skip"
     assert value == 120
 
-    {status, _} = File.open "README.md"
+    {status, _} = File.open("README.md")
     assert status == :ok
 
-    {status, file} = File.open "NO EXISTING FILE"
+    {status, file} = File.open("NO EXISTING FILE")
     assert status == :error
     assert file == :enoent
   end
@@ -241,33 +247,39 @@ defmodule TrainingTest do
     assert Date.day_of_week(date) == 6
     assert Date.add(date, 10) == ~D[2021-06-15]
 
-    range = Date.range ~D[2021-06-01], ~D[2021-06-10]
+    range = Date.range(~D[2021-06-01], ~D[2021-06-10])
     assert ~D[2021-06-09] in range
     refute ~D[2021-07-01] in range
   end
 
   test "back block" do
-    atom = case 1 do
-      1 -> :one
-      2 -> :two
-    end
+    atom =
+      case 1 do
+        1 -> :one
+        2 -> :two
+      end
+
     assert atom == :one
   end
 
   test "with" do
-    nobody = with {:ok, file} = File.open("test.do.not.delete"),
-                  content = IO.read(file, :all),
-                  :ok = File.close(file),
-                  [_, uid, gid] <- Regex.run(~r{nobody:.*?:([-0-9]+):([-0-9]+):}, content),
-                  do: "nobody: uid: #{uid}, gid: #{gid}"
+    nobody =
+      with {:ok, file} = File.open("test.do.not.delete"),
+           content = IO.read(file, :all),
+           :ok = File.close(file),
+           [_, uid, gid] <- Regex.run(~r{nobody:.*?:([-0-9]+):([-0-9]+):}, content),
+           do: "nobody: uid: #{uid}, gid: #{gid}"
+
     assert nobody == "nobody: uid: -2, gid: -2"
 
-    it_is_nil = with {:ok, file} = File.open("test.do.not.delete"),
-                     content = IO.read(file, :all),
-                     :ok = File.close(file),
-                     [_, uid, gid] <- Regex.run(~r{xxxxx:.*?:([-0-9]+):([-0-9]+):}, content),
-                     do: "xxxxx: uid: #{uid}, gid: #{gid}"
-    assert it_is_nil == :nil
+    it_is_nil =
+      with {:ok, file} = File.open("test.do.not.delete"),
+           content = IO.read(file, :all),
+           :ok = File.close(file),
+           [_, uid, gid] <- Regex.run(~r{xxxxx:.*?:([-0-9]+):([-0-9]+):}, content),
+           do: "xxxxx: uid: #{uid}, gid: #{gid}"
+
+    assert it_is_nil == nil
   end
 
   test "anonymous functions" do
@@ -296,10 +308,10 @@ defmodule TrainingTest do
     assert handle_open.(File.open("test.do.not.delete")) == "Read data: # PASSWORDs\n"
     assert handle_open.(File.open("file.not.exists")) == "Error: no such file or directory"
 
-    password = fn (password) ->
+    password = fn password ->
       fn
-        (^password) -> :OPEN
-        (_) -> :LOCKED
+        ^password -> :OPEN
+        _ -> :LOCKED
       end
     end
 
@@ -337,6 +349,7 @@ defmodule TrainingTest do
     assert inner == %App.Structs.Inner{is_ok: false}
 
     tiago = %App.Structs{tiago | inner: inner}
+
     assert tiago == %App.Structs{
              age: 28,
              github: :tihlok,
@@ -350,7 +363,8 @@ defmodule TrainingTest do
       %{name: "Tiago", languages: [:elixir, :java, :js]},
       %{name: "Morgana", languages: [:miau]}
     ]
-    elixir_devs = fn (:get, collection, next) ->
+
+    elixir_devs = fn :get, collection, next ->
       for row <- collection do
         if :elixir in row.languages do
           next.(row)

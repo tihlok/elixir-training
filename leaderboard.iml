@@ -80,5 +80,8 @@
     <orderEntry type="library" name="deep_merge" level="project" />
     <orderEntry type="library" name="ex_guard" level="project" />
     <orderEntry type="library" name="inch_ex" level="project" />
+    <orderEntry type="library" name="git_hooks" level="project" />
+    <orderEntry type="library" name="blankable" level="project" />
+    <orderEntry type="library" name="recase" level="project" />
   </component>
 </module>

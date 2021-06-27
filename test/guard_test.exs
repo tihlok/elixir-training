@@ -7,7 +7,7 @@ defmodule GuardTest do
   test "should test guard" do
     assert App.Guard.what_is(1) == :number
     assert App.Guard.what_is(0.9) == :number
-    assert App.Guard.what_is(0xcafe) == :number
+    assert App.Guard.what_is(0xCAFE) == :number
     assert App.Guard.what_is([1, :coffe, "cats", %{:empty => "map"}]) == :list
     assert App.Guard.what_is(:hey_yo) == :atom
     assert App.Guard.what_is("this is a string") == :unknown

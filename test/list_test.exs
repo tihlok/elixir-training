@@ -23,10 +23,10 @@ defmodule ListTest do
   end
 
   test "should test lists map function" do
-    assert App.List.map([], &(&1)) == []
-    assert App.List.map([1, 2, 3], &(&1)) == [1, 2, 3]
+    assert App.List.map([], & &1) == []
+    assert App.List.map([1, 2, 3], & &1) == [1, 2, 3]
     assert App.List.map([1, 2, 3], &(&1 - &1)) == [0, 0, 0]
-    assert App.List.map([1, 2, 3], &(&1 == 2)) == [:false, :true, false]
+    assert App.List.map([1, 2, 3], &(&1 == 2)) == [false, true, false]
   end
 
   test "should get max value" do

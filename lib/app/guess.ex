@@ -38,7 +38,7 @@ defmodule App.Guess do
     play_guess(number, range, 1, div(last, 2))
   end
 
-  def play(wrong, _)  do
+  def play(wrong, _) do
     {:not_a_number, 0, wrong}
   end
 
@@ -47,14 +47,18 @@ defmodule App.Guess do
   end
 
   defp play_guess(number, first..last, count, guess) when guess > number do
-    new_guess = (first + guess)
-                |> div(2)
+    new_guess =
+      (first + guess)
+      |> div(2)
+
     play_guess(number, first..guess, count + 1, new_guess)
   end
 
   defp play_guess(number, first..last, count, guess) when guess < number do
-    new_guess = (guess + last)
-                |> div(2)
+    new_guess =
+      (guess + last)
+      |> div(2)
+
     play_guess(number, guess..last, count + 1, new_guess)
   end
 end

@@ -43,23 +43,25 @@ defmodule App.Temperature do
   """
   def of(location) when is_list(location) do
     manager_pid = spawn(__MODULE__, :manager, [[], Enum.count(location)])
+
     location
-    |> Enum.map(
-         fn l ->
-           pid = spawn(__MODULE__, :get_temperature, [])
-           send pid, {manager_pid, l}
-         end
-       )
+    |> Enum.map(fn l ->
+      pid = spawn(__MODULE__, :get_temperature, [])
+      send(pid, {manager_pid, l})
+    end)
   end
 
   def of(location) do
-    result = location
-             |> endpoint
-             |> HTTPoison.get
-             |> parse
+    result =
+      location
+      |> endpoint
+      |> HTTPoison.get()
+      |> parse
+
     case result do
       {:ok, temp} ->
         "[#{location}] #{temp} °C"
+
       :error ->
         "[#{location}] not found"
     end
@@ -67,40 +69,54 @@ defmodule App.Temperature do
 
   def get_temperature() do
     receive do
-      {pid, location} -> send pid, {:ok, of(location)}
-      _ -> IO.puts "ERROR"
+      {pid, location} -> send(pid, {:ok, of(location)})
+      _ -> IO.puts("ERROR")
     end
+
     get_temperature()
   end
 
   def manager(locations \\ [], total) do
     receive do
-      {:ok, temp} -> results = [temp | locations]
-                     if(Enum.count(results) == total) do
-                       send self(), :exit
-                     end
-                     manager(results, total)
-      :exit -> IO.puts("=============== DONE ===============")
-               IO.puts(
-                 locations
-                 |> Enum.sort
-                 |> Enum.join("\n")
-               )
-               IO.puts("====================================")
-      _ -> manager(locations, total)
+      {:ok, temp} ->
+        results = [temp | locations]
+
+        if(Enum.count(results) == total) do
+          send(self(), :exit)
+        end
+
+        manager(results, total)
+
+      :exit ->
+        IO.puts("=============== DONE ===============")
+
+        IO.puts(
+          locations
+          |> Enum.sort()
+          |> Enum.join("\n")
+        )
+
+        IO.puts("====================================")
+
+      _ ->
+        manager(locations, total)
     end
   end
 
-  defp parse({:ok, %HTTPoison.Response{body: body, status_code: 200}}), do: body
-                                                                            |> JSON.decode!
-                                                                            |> temperature
+  defp parse({:ok, %HTTPoison.Response{body: body, status_code: 200}}),
+    do:
+      body
+      |> JSON.decode!()
+      |> temperature
 
   defp parse(_), do: :error
 
   defp temperature(json) do
     try do
-      temp = json["main"]["temp"]
-             |> kelvin_to_celsius
+      temp =
+        json["main"]["temp"]
+        |> kelvin_to_celsius
+
       {:ok, temp}
     rescue
       _ -> :error
