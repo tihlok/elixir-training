@@ -17,24 +17,16 @@ defmodule App.Factorial do
       3628800
 
       iex> App.Factorial.of -1
-      :error
+      :non_positive_number
 
       iex> App.Factorial.of -9999
-      :error
+      :non_positive_number
 
       iex> App.Factorial.of :atom
-      :error
+      :not_a_number
   """
-  def of(n) when is_integer(n) and n > 0 do
-    n * of(n - 1)
-  end
-
-  # def of(0) do
-  def of(n) when is_integer(n) and n === 0 do
-    1
-  end
-
-  def of(n) do
-    :error
-  end
+  def of(0), do: 1
+  def of(n) when is_number(n) and n > 0, do: n * of(n - 1)
+  def of(n) when is_number(n) and n < 0, do: :non_positive_number
+  def of(_), do: :not_a_number
 end
