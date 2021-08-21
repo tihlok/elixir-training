@@ -1,21 +1,19 @@
-# Leaderboard Service
+# Elixir Training
 
-**TODO: Add description**
+## Install
 
-## Installation
+- clone this repo
+- download deps `mix deps.get`
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `leaderboard` to your list of dependencies in `mix.exs`:
+______
 
-```elixir
-def deps do
-  [
-    {:leaderboard, "~> 0.1.0"}
-  ]
-end
-```
+## Running
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/leaderboard](https://hexdocs.pm/leaderboard).
+______
 
+## Tests
+
+- `mix test`
+- or skipping the tests that require internet: `mix test --exclude=net`
+
+______
