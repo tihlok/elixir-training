@@ -21,7 +21,7 @@ defmodule LearningTest do
     assert add_one.(1) == 2
     assert add_one.(-1) == 0
 
-    speak = &(IO.puts(&1))
+    speak = &IO.puts(&1)
     assert capture_io(fn -> speak.("HI") end) == "HI\n"
 
     div_rem = &{div(&1, &2), rem(&1, &2)}
@@ -38,14 +38,17 @@ defmodule LearningTest do
     assert App.Factorial.of(0) == 1
     assert App.Factorial.of(1) == 1
     assert App.Factorial.of(2) == 2
-    assert App.Factorial.of(100) == 93326215443944152681699238856266700490715968264381621468592963895217599993229915608941463976156518286253697920827223758251185210916864000000000000000000000000
+
+    assert App.Factorial.of(100) ==
+             93_326_215_443_944_152_681_699_238_856_266_700_490_715_968_264_381_621_468_592_963_895_217_599_993_229_915_608_941_463_976_156_518_286_253_697_920_827_223_758_251_185_210_916_864_000_000_000_000_000_000_000_000
+
     assert App.Factorial.of(-1) == :non_positive_number
     assert App.Factorial.of(:morgana) == :not_a_number
   end
 
   @name "Tiago"
   test "006 - module attributes" do
-    print = &("#{&1} #{@name}")
+    print = &"#{&1} #{@name}"
     assert @name == "Tiago"
     assert print.("hi") == "hi Tiago"
   end
@@ -66,10 +69,10 @@ defmodule LearningTest do
     end
 
     test "map" do
-      assert MyList.map([], &(&1)) == []
-      assert MyList.map([1, 2, 3], &(&1)) == [1, 2, 3]
+      assert MyList.map([], & &1) == []
+      assert MyList.map([1, 2, 3], & &1) == [1, 2, 3]
       assert MyList.map([1, 2, 3], &(&1 * 2)) == [2, 4, 6]
-      assert MyList.map(:number, &(&1)) == :invalid_params
+      assert MyList.map(:number, & &1) == :invalid_params
     end
 
     test "swap" do

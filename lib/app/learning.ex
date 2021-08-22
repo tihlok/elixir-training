@@ -5,8 +5,8 @@ defmodule Learning do
 
   def greet_for(name, greeting) do
     fn
-      (^name) -> {:ok, "#{greeting}, #{name}!"}
-      (_) -> {:error, "I don't know you..."}
+      ^name -> {:ok, "#{greeting}, #{name}!"}
+      _ -> {:error, "I don't know you..."}
     end
   end
 end

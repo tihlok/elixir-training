@@ -7,7 +7,8 @@ defmodule TemperatureTest do
   test "should return a encoded endpoint when take a location" do
     endpoint = App.Temperature.endpoint("Londrina")
 
-    assert endpoint == "http://api.openweathermap.org/data/2.5/weather?appid=22ed41bd5f74ad29481d98452e672c6e&q=Londrina"
+    assert endpoint ==
+             "http://api.openweathermap.org/data/2.5/weather?appid=22ed41bd5f74ad29481d98452e672c6e&q=Londrina"
   end
 
   test "should convert Kelvin to Celsius" do

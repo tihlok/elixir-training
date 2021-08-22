@@ -28,10 +28,10 @@ defmodule Leaderboard.MixProject do
 
   def deps do
     [
-      {:ex_doc, "~> 0.24", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.25.1", only: :dev, runtime: false},
       {:httpoison, "~> 1.8.0"},
       {:json, "~> 1.4.1"},
-      {:git_hooks, "~> 0.6.2", only: [:dev], runtime: false}
+      {:git_hooks, "~> 0.6.3", only: [:dev], runtime: false}
     ]
   end
 end
