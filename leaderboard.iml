@@ -47,6 +47,9 @@
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/json" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/metrics" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/idna" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/recase" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/blankable" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/git_hooks" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="ex_doc" level="project" />
