@@ -2,7 +2,6 @@ defmodule LearningTest do
   use ExUnit.Case, async: true
   doctest Learning
   doctest Math
-  doctest ControlFlow
 
   import ExUnit.CaptureIO
 
