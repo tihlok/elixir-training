@@ -11,6 +11,7 @@ config :git_hooks,
   hooks: [
     pre_commit: [
       tasks: [
+        {:cmd, "echo 'executing git pre hook'"},
         {:cmd, "mix format"},
         {:cmd, "mix hex.outdated"},
         {:cmd, "mix test --color --cover"},
