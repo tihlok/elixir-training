@@ -32,6 +32,7 @@ defmodule CardsTest do
 
   test "deck" do
     deck = Cards.deck()
+
     assert Enum.all?(
              [
                %{
@@ -280,13 +281,26 @@ defmodule CardsTest do
   end
 
   test "table" do
-    assert Cards.table == %{
+    assert Cards.table() == %{
              pile: [],
              clubs: [],
              diamonds: [],
              hearts: [],
              spades: [],
-             slots: [:empty, :empty, :empty, :empty, :empty, :empty, :empty, :empty, :empty, :empty, :empty, :empty]
+             slots: [
+               :empty,
+               :empty,
+               :empty,
+               :empty,
+               :empty,
+               :empty,
+               :empty,
+               :empty,
+               :empty,
+               :empty,
+               :empty,
+               :empty
+             ]
            }
   end
 

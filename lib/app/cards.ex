@@ -21,7 +21,7 @@ defmodule Cards do
   [%{:A => 1},%{2 => 2},%{3 => 3},%{4 => 4},%{5 => 5},%{6 => 6},%{7 => 7},%{:J => 11},%{:Q => 12},%{:K => 13}]
   """
   def cards,
-      do: @cards
+    do: @cards
 
   @doc """
   All cards kinds
@@ -31,7 +31,7 @@ defmodule Cards do
   [:CLUBS, :DIAMONDS, :HEARTS, :SPADES]
   """
   def kinds,
-      do: @kinds
+    do: @kinds
 
   @doc """
   Create a DECK with all CARDS by KIND
@@ -65,16 +65,16 @@ defmodule Cards do
   %{pile: [], clubs: [], diamonds: [], hearts: [], spades: [], slots: [:empty, :empty, :empty, :empty, :empty, :empty, :empty, :empty, :empty, :empty, :empty, :empty]}
   """
   def table,
-      do:
-      %{
-        pile: [],
-        clubs: [],
-        diamonds: [],
-        hearts: [],
-        spades: [],
-        slots: :empty
-               |> List.duplicate(12),
-      }
+    do: %{
+      pile: [],
+      clubs: [],
+      diamonds: [],
+      hearts: [],
+      spades: [],
+      slots:
+        :empty
+        |> List.duplicate(12)
+    }
 
   defp card_atom(kind, card) do
     %{kind: kind, card: card}
