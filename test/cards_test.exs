@@ -11,300 +11,133 @@ defmodule CardsTest do
     assert is_list(Cards.module_info())
   end
 
-  test "cards" do
-    assert Cards.cards() == [
-             %{:A => 1},
-             %{2 => 2},
-             %{3 => 3},
-             %{4 => 4},
-             %{5 => 5},
-             %{6 => 6},
-             %{7 => 7},
-             %{:J => 11},
-             %{:Q => 12},
-             %{:K => 13}
-           ]
+  test "cards/0" do
+    assert Cards.cards() == [:A, 2, 3, 4, 5, 6, 7, :J, :Q, :K]
   end
 
-  test "kinds" do
+  test "kinds/0" do
     assert Cards.kinds() == [:CLUBS, :DIAMONDS, :HEARTS, :SPADES]
   end
 
-  test "deck" do
-    deck = Cards.deck()
+  test "deck/1" do
+    deck = Cards.deck(0)
+    assert length(deck) == 40
 
-    assert Enum.all?(
-             [
-               %{
-                 kind: :CLUBS,
-                 card: %{
-                   :A => 1
-                 }
-               },
-               %{
-                 kind: :CLUBS,
-                 card: %{
-                   2 => 2
-                 }
-               },
-               %{
-                 kind: :CLUBS,
-                 card: %{
-                   3 => 3
-                 }
-               },
-               %{
-                 kind: :CLUBS,
-                 card: %{
-                   4 => 4
-                 }
-               },
-               %{
-                 kind: :CLUBS,
-                 card: %{
-                   5 => 5
-                 }
-               },
-               %{
-                 kind: :CLUBS,
-                 card: %{
-                   6 => 6
-                 }
-               },
-               %{
-                 kind: :CLUBS,
-                 card: %{
-                   7 => 7
-                 }
-               },
-               %{
-                 kind: :CLUBS,
-                 card: %{
-                   :J => 11
-                 }
-               },
-               %{
-                 kind: :CLUBS,
-                 card: %{
-                   :Q => 12
-                 }
-               },
-               %{
-                 kind: :CLUBS,
-                 card: %{
-                   :K => 13
-                 }
-               },
-               %{
-                 kind: :DIAMONDS,
-                 card: %{
-                   :A => 1
-                 }
-               },
-               %{
-                 kind: :DIAMONDS,
-                 card: %{
-                   2 => 2
-                 }
-               },
-               %{
-                 kind: :DIAMONDS,
-                 card: %{
-                   3 => 3
-                 }
-               },
-               %{
-                 kind: :DIAMONDS,
-                 card: %{
-                   4 => 4
-                 }
-               },
-               %{
-                 kind: :DIAMONDS,
-                 card: %{
-                   5 => 5
-                 }
-               },
-               %{
-                 kind: :DIAMONDS,
-                 card: %{
-                   6 => 6
-                 }
-               },
-               %{
-                 kind: :DIAMONDS,
-                 card: %{
-                   7 => 7
-                 }
-               },
-               %{
-                 kind: :DIAMONDS,
-                 card: %{
-                   :J => 11
-                 }
-               },
-               %{
-                 kind: :DIAMONDS,
-                 card: %{
-                   :Q => 12
-                 }
-               },
-               %{
-                 kind: :DIAMONDS,
-                 card: %{
-                   :K => 13
-                 }
-               },
-               %{
-                 kind: :HEARTS,
-                 card: %{
-                   :A => 1
-                 }
-               },
-               %{
-                 kind: :HEARTS,
-                 card: %{
-                   2 => 2
-                 }
-               },
-               %{
-                 kind: :HEARTS,
-                 card: %{
-                   3 => 3
-                 }
-               },
-               %{
-                 kind: :HEARTS,
-                 card: %{
-                   4 => 4
-                 }
-               },
-               %{
-                 kind: :HEARTS,
-                 card: %{
-                   5 => 5
-                 }
-               },
-               %{
-                 kind: :HEARTS,
-                 card: %{
-                   6 => 6
-                 }
-               },
-               %{
-                 kind: :HEARTS,
-                 card: %{
-                   7 => 7
-                 }
-               },
-               %{
-                 kind: :HEARTS,
-                 card: %{
-                   :J => 11
-                 }
-               },
-               %{
-                 kind: :HEARTS,
-                 card: %{
-                   :Q => 12
-                 }
-               },
-               %{
-                 kind: :HEARTS,
-                 card: %{
-                   :K => 13
-                 }
-               },
-               %{
-                 kind: :SPADES,
-                 card: %{
-                   :A => 1
-                 }
-               },
-               %{
-                 kind: :SPADES,
-                 card: %{
-                   2 => 2
-                 }
-               },
-               %{
-                 kind: :SPADES,
-                 card: %{
-                   3 => 3
-                 }
-               },
-               %{
-                 kind: :SPADES,
-                 card: %{
-                   4 => 4
-                 }
-               },
-               %{
-                 kind: :SPADES,
-                 card: %{
-                   5 => 5
-                 }
-               },
-               %{
-                 kind: :SPADES,
-                 card: %{
-                   6 => 6
-                 }
-               },
-               %{
-                 kind: :SPADES,
-                 card: %{
-                   7 => 7
-                 }
-               },
-               %{
-                 kind: :SPADES,
-                 card: %{
-                   :J => 11
-                 }
-               },
-               %{
-                 kind: :SPADES,
-                 card: %{
-                   :Q => 12
-                 }
-               },
-               %{
-                 kind: :SPADES,
-                 card: %{
-                   :K => 13
-                 }
-               }
-             ],
-             fn d -> Enum.member?(deck, d) end
-           ) == true
+    assert deck == [
+             {:CLUBS, :A},
+             {:CLUBS, 2},
+             {:CLUBS, 3},
+             {:CLUBS, 4},
+             {:CLUBS, 5},
+             {:CLUBS, 6},
+             {:CLUBS, 7},
+             {:CLUBS, :J},
+             {:CLUBS, :Q},
+             {:CLUBS, :K},
+             {:DIAMONDS, :A},
+             {:DIAMONDS, 2},
+             {:DIAMONDS, 3},
+             {:DIAMONDS, 4},
+             {:DIAMONDS, 5},
+             {:DIAMONDS, 6},
+             {:DIAMONDS, 7},
+             {:DIAMONDS, :J},
+             {:DIAMONDS, :Q},
+             {:DIAMONDS, :K},
+             {:HEARTS, :A},
+             {:HEARTS, 2},
+             {:HEARTS, 3},
+             {:HEARTS, 4},
+             {:HEARTS, 5},
+             {:HEARTS, 6},
+             {:HEARTS, 7},
+             {:HEARTS, :J},
+             {:HEARTS, :Q},
+             {:HEARTS, :K},
+             {:SPADES, :A},
+             {:SPADES, 2},
+             {:SPADES, 3},
+             {:SPADES, 4},
+             {:SPADES, 5},
+             {:SPADES, 6},
+             {:SPADES, 7},
+             {:SPADES, :J},
+             {:SPADES, :Q},
+             {:SPADES, :K}
+           ]
   end
 
-  test "table" do
+  test "table/0" do
     assert Cards.table() == %{
-             pile: [],
-             clubs: [],
-             diamonds: [],
-             hearts: [],
-             spades: [],
-             slots: [
-               :empty,
-               :empty,
-               :empty,
-               :empty,
-               :empty,
-               :empty,
-               :empty,
-               :empty,
-               :empty,
-               :empty,
-               :empty,
-               :empty
-             ]
+             :center => [],
+             :CLUBS => [],
+             :DIAMONDS => [],
+             :HEARTS => [],
+             :SPADES => [],
+             :sides => []
            }
   end
 
-  test "fortune teller" do
-    deck = Cards.deck()
+  test "draw/2 fortune teller" do
+    {deck, table} = Cards.draw()
+    assert length(deck) == 39
+
+    {deck, table} = Cards.draw({deck, table})
+    assert length(deck) == 38
+
+    {deck, table} =
+      {deck, table}
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+
+    assert length(deck) == 30
+
+    {deck, table} =
+      {deck, table}
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+      |> Cards.draw()
+
+    IO.inspect(deck)
+    IO.inspect(table)
+
+    assert deck == []
+    assert length(deck) == 0
+
+    assert Enum.member?(table[:CLUBS], :A)
+    assert 1 <= length(table[:CLUBS]) >= 7
   end
 end

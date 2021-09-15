@@ -1,16 +1,5 @@
 defmodule Cards do
-  @cards [
-    %{:A => 1},
-    %{2 => 2},
-    %{3 => 3},
-    %{4 => 4},
-    %{5 => 5},
-    %{6 => 6},
-    %{7 => 7},
-    %{:J => 11},
-    %{:Q => 12},
-    %{:K => 13}
-  ]
+  @cards [:A, 2, 3, 4, 5, 6, 7, :J, :Q, :K]
   @kinds [:CLUBS, :DIAMONDS, :HEARTS, :SPADES]
 
   @doc """
@@ -18,7 +7,7 @@ defmodule Cards do
   from A to K, excluding 8, 9, 10
 
   iex> Cards.cards
-  [%{:A => 1},%{2 => 2},%{3 => 3},%{4 => 4},%{5 => 5},%{6 => 6},%{7 => 7},%{:J => 11},%{:Q => 12},%{:K => 13}]
+  [:A, 2, 3, 4, 5, 6, 7, :J, :Q, :K]
   """
   def cards,
     do: @cards
@@ -36,16 +25,7 @@ defmodule Cards do
   @doc """
   Create a DECK with all CARDS by KIND
 
-  iex> Cards.deck(-1) |> Enum.member?(%{kind: :CLUBS, card: %{:A => 1}})
-  true
-
-  iex> Cards.deck(0) |> Enum.member?(%{kind: :SPADES, card: %{5 => 5}})
-  true
-
-  iex> Cards.deck |> Enum.member?(%{kind: :DIAMONDS, card: %{:K => 13}})
-  true
-
-  iex> Cards.deck(10) |> Enum.member?(%{kind: :HEARTS, card: %{:Q => 12}})
+  iex> Cards.deck(-1) |> Enum.member?({:CLUBS, :A})
   true
   """
   def deck(shuffles \\ 1) do
@@ -55,33 +35,71 @@ defmodule Cards do
     |> deck(shuffles)
   end
 
-  defp deck(deck, shuffles) when shuffles > 0, do: deck(Enum.shuffle(deck), shuffles - 1)
-  defp deck(deck, _), do: deck
+  defp deck(deck, shuffles) when shuffles > 0,
+    do: deck(Enum.shuffle(deck), shuffles - 1)
+
+  defp deck(deck, _),
+    do: deck
 
   @doc """
   Create a TABLE for receiving the CARDs from the DECK
 
   iex> Cards.table
-  %{pile: [], clubs: [], diamonds: [], hearts: [], spades: [], slots: [:empty, :empty, :empty, :empty, :empty, :empty, :empty, :empty, :empty, :empty, :empty, :empty]}
+  %{:center => [], :CLUBS => [], :DIAMONDS => [], :HEARTS => [], :SPADES => [], :sides => []}
   """
   def table,
     do: %{
-      pile: [],
-      clubs: [],
-      diamonds: [],
-      hearts: [],
-      spades: [],
-      slots:
-        :empty
-        |> List.duplicate(12)
+      :center => [],
+      :CLUBS => [],
+      :DIAMONDS => [],
+      :HEARTS => [],
+      :SPADES => [],
+      :sides => []
     }
 
-  defp card_atom(kind, card) do
-    %{kind: kind, card: card}
+  @doc """
+  DRAW one CARD from DECK and put it on TABLE at the right place
+
+  iex> {deck, _} = Cards.draw()
+  iex> length(deck)
+  39
+
+  iex> {deck, _} = Cards.draw() |> Cards.draw() |> Cards.draw()
+  iex> length(deck)
+  37
+  """
+  def draw(),
+    do: draw({deck(), table()})
+
+  def draw({deck, table}) do
+    [top | deck] = deck
+    {deck, table_draw(top, table)}
   end
 
-  defp cards_kind(kind) do
-    cards()
-    |> Enum.map(&card_atom(kind, &1))
+  defp table_draw({type, :A}, table),
+    do:
+      table
+      |> Map.put(type, [:A])
+
+  defp table_draw({type, card}, table) when length(table.sides) < 12 do
+    sides = [{type, card} | table.sides]
+
+    table
+    |> Map.put(:sides, sides)
   end
+
+  defp table_draw({type, card}, table) when length(table.sides) >= 12 do
+    center = [{type, card} | table.center]
+
+    table
+    |> Map.put(:center, center)
+  end
+
+  defp cards_kind(kind),
+    do:
+      cards()
+      |> Enum.map(&card_atom(kind, &1))
+
+  defp card_atom(kind, card),
+    do: {kind, card}
 end
