@@ -10,7 +10,7 @@ import Config
 config :rpg,
   ecto_repos: [RPG.Repo]
 
-config :rpg, Learning.Repo,
+config :rpg, RPG.Repo,
   migration_primary_key: [type: :binary_id],
   migration_foreign_key: [type: :binary_id]
 

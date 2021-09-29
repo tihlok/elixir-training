@@ -1,0 +1,8 @@
+<h1>Show User: <%= render "user.name.html", user: @user %></h1>
+
+<p>ID: <b><%= @user.id %></b></p>
+<p>First Name: <b><%= first_name(@user) %></b></p>
+<p>Full Name: <b><%= @user.name %></b></p>
+<p>Username: <b><%= @user.username %></b></p>
+
+<%= link "BACK", to: Routes.user_path(@conn, :index) %>
