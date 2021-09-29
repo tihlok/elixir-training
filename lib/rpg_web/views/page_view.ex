@@ -1,3 +1,3 @@
-defmodule RpgWeb.PageView do
-  use RpgWeb, :view
+defmodule RPGWeb.PageView do
+  use RPGWeb, :view
 end

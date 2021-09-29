@@ -1,4 +1,4 @@
-defmodule RpgWeb.Endpoint do
+defmodule RPGWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :rpg
 
   # The session will be stored in the cookie and signed,
@@ -46,5 +46,5 @@ defmodule RpgWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
-  plug RpgWeb.Router
+  plug RPGWeb.Router
 end

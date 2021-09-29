@@ -1,11 +1,11 @@
-defmodule RpgWeb.Router do
-  use RpgWeb, :router
+defmodule RPGWeb.Router do
+  use RPGWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
-    plug :put_root_layout, {RpgWeb.LayoutView, :root}
+    plug :put_root_layout, {RPGWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
@@ -14,14 +14,14 @@ defmodule RpgWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", RpgWeb do
+  scope "/", RPGWeb do
     pipe_through :browser
 
     get "/", PageController, :index
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", RpgWeb do
+  # scope "/api", RPGWeb do
   #   pipe_through :api
   # end
 
@@ -37,7 +37,7 @@ defmodule RpgWeb.Router do
 
     scope "/" do
       pipe_through :browser
-      live_dashboard "/dashboard", metrics: RpgWeb.Telemetry
+      live_dashboard "/dashboard", metrics: RPGWeb.Telemetry
     end
   end
 

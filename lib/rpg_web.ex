@@ -1,12 +1,12 @@
-defmodule RpgWeb do
+defmodule RPGWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, views, channels and so on.
 
   This can be used in your application as:
 
-      use RpgWeb, :controller
-      use RpgWeb, :view
+      use RPGWeb, :controller
+      use RPGWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -19,11 +19,11 @@ defmodule RpgWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: RpgWeb
+      use Phoenix.Controller, namespace: RPGWeb
 
       import Plug.Conn
-      import RpgWeb.Gettext
-      alias RpgWeb.Router.Helpers, as: Routes
+      import RPGWeb.Gettext
+      alias RPGWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -31,7 +31,7 @@ defmodule RpgWeb do
     quote do
       use Phoenix.View,
         root: "lib/rpg_web/templates",
-        namespace: RpgWeb
+        namespace: RPGWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller,
@@ -45,7 +45,7 @@ defmodule RpgWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {RpgWeb.LayoutView, "live.html"}
+        layout: {RPGWeb.LayoutView, "live.html"}
 
       unquote(view_helpers())
     end
@@ -72,7 +72,7 @@ defmodule RpgWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import RpgWeb.Gettext
+      import RPGWeb.Gettext
     end
   end
 
@@ -87,9 +87,9 @@ defmodule RpgWeb do
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
 
-      import RpgWeb.ErrorHelpers
-      import RpgWeb.Gettext
-      alias RpgWeb.Router.Helpers, as: Routes
+      import RPGWeb.ErrorHelpers
+      import RPGWeb.Gettext
+      alias RPGWeb.Router.Helpers, as: Routes
     end
   end
 

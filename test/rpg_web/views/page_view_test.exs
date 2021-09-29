@@ -1,3 +1,3 @@
-defmodule RpgWeb.PageViewTest do
-  use RpgWeb.ConnCase, async: true
+defmodule RPGWeb.PageViewTest do
+  use RPGWeb.ConnCase, async: true
 end

@@ -8,13 +8,17 @@
 import Config
 
 config :rpg,
-  ecto_repos: [Rpg.Repo]
+  ecto_repos: [RPG.Repo]
+
+config :rpg, Learning.Repo,
+  migration_primary_key: [type: :binary_id],
+  migration_foreign_key: [type: :binary_id]
 
 # Configures the endpoint
-config :rpg, RpgWeb.Endpoint,
+config :rpg, RPGWeb.Endpoint,
   url: [host: "localhost"],
-  render_errors: [view: RpgWeb.ErrorView, accepts: ~w(html json), layout: false],
-  pubsub_server: Rpg.PubSub,
+  render_errors: [view: RPGWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: RPG.PubSub,
   live_view: [signing_salt: "ixkWBKdE"]
 
 # Configures the mailer
@@ -24,7 +28,7 @@ config :rpg, RpgWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :rpg, Rpg.Mailer, adapter: Swoosh.Adapters.Local
+config :rpg, RPG.Mailer, adapter: Swoosh.Adapters.Local
 
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false

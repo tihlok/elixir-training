@@ -1,5 +1,5 @@
-defmodule RpgWeb.ErrorView do
-  use RpgWeb, :view
+defmodule RPGWeb.ErrorView do
+  use RPGWeb, :view
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.

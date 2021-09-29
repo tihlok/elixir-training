@@ -1,4 +1,4 @@
-# Rpg
+# RPG
 
 To start your Phoenix server:
 

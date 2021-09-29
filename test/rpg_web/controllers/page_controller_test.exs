@@ -1,5 +1,5 @@
-defmodule RpgWeb.PageControllerTest do
-  use RpgWeb.ConnCase
+defmodule RPGWeb.PageControllerTest do
+  use RPGWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get(conn, "/")

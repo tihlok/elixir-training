@@ -1,6 +1,6 @@
-defmodule Rpg do
+defmodule RPG do
   @moduledoc """
-  Rpg keeps the contexts that define your domain
+  RPG keeps the contexts that define your domain
   and business logic.
 
   Contexts are also responsible for managing your data, regardless

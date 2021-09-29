@@ -1,5 +1,5 @@
-defmodule RpgWeb.LayoutView do
-  use RpgWeb, :view
+defmodule RPGWeb.LayoutView do
+  use RPGWeb, :view
 
   # Phoenix LiveDashboard is available only in development by default,
   # so we instruct Elixir to not warn if the dashboard route is missing.

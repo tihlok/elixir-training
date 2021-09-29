@@ -1,4 +1,4 @@
-defmodule RpgWeb.ErrorHelpers do
+defmodule RPGWeb.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
@@ -39,9 +39,9 @@ defmodule RpgWeb.ErrorHelpers do
     # should be written to the errors.po file. The :count option is
     # set by Ecto and indicates we should also apply plural rules.
     if count = opts[:count] do
-      Gettext.dngettext(RpgWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(RPGWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(RpgWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(RPGWeb.Gettext, "errors", msg, opts)
     end
   end
 end
