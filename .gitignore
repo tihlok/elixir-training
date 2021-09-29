@@ -1,0 +1,13 @@
+.idea/
+.vscode/
+*.iml
+
+/_build/
+/cover/
+/deps/
+/doc/
+/.fetch
+erl_crash.dump
+*.ez
+/priv/static/
+/assets/node_modules/
