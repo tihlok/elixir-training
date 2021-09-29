@@ -8,6 +8,7 @@ defmodule RPGWeb.Router do
     plug :put_root_layout, {RPGWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug RPGWeb.Auth
   end
 
   pipeline :api do

@@ -8,6 +8,14 @@
     <h2>Resources</h2>
     <ul>
       <li>
+        <%= link "SignUp", to: Routes.user_path(@conn, :new) %>
+      </li>
+    </ul>
+  </article>
+  <article class="column">
+    <h2>Resources</h2>
+    <ul>
+      <li>
         <%= link "User Management", to: Routes.user_path(@conn, :index) %>
       </li>
     </ul>

@@ -8,4 +8,8 @@ defmodule RPGWeb.UserView do
     |> String.split(" ")
     |> Enum.at(0)
   end
+
+  def is_me?(conn, user) do
+    conn.assigns.current_user.id == user.id
+  end
 end

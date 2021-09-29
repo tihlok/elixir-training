@@ -3,8 +3,14 @@
 <table>
     <%= for user <- @users do %>
         <tr>
-            <td><%= render "user.name.html", user: user %></td>
-            <td><%= link "View", to: Routes.user_path(@conn, :show, user.id) %></td>
+            <td>
+                <%= render "user.name.html", user: user %>
+            </td>
+            <td>
+                <%# <%= if is_me?(@conn, user) do %>
+                    <%= link "View", to: Routes.user_path(@conn, :show, user.id) %>
+                <%# <% end %>
+            </td>
         </tr>
     <% end %>
 </table>
